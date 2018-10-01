@@ -1,0 +1,30 @@
+---
+title: "615_Assignment3"
+author: "Xinyi Wang"
+date: "9/30/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+```
+
+```{r}
+mydata = read.csv("/Users/CindyWang/Desktop/615/hw3/pokemon.csv")
+#str(mydata)
+ggplot(mydata %>% 
+      group_by(Type.1) %>%
+      mutate(med=median(Attack)),
+      aes(x=reorder(Type.1, Attack, FUN=median), y=Attack,color = Type.1)) +
+coord_flip() +
+geom_boxplot(aes(fill=med)) +
+scale_fill_gradient(low="white", high="white") +
+labs(x="Type 1") +
+theme(legend.position="none")
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
